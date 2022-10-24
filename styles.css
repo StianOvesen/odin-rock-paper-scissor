@@ -1,0 +1,71 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#reveal {
+    font-size: larger;
+    color: dimgrey;
+    text-align: center;
+}
+
+#result {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.result-wrapper {
+    height: 50px;
+}
+
+.scoreboard {
+    display: flex;
+    padding: 2%;
+    gap: 30px;
+
+}
+
+.choices {
+    display: flex;
+    justify-content: space-around;
+    min-width: 170px;
+    min-height: fit-content;
+}
+
+.scoreboard-player,
+.scoreboard-computer {
+    text-align: center;
+    min-width: 75px;
+    padding: 8px;
+    background-color: #efefef;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+
+}
+
+#score-player,
+#score-computer {
+    font-size: 48px;
+}
+
+#game-btn {
+    font-size: 32px;
+    border-radius: 5px;
+    background-color: #efefef;
+    border: 1px solid lightgrey;
+}
+
+#game-btn:hover {
+    border: 1px solid black;
+}
+
+#game-btn:active {
+    background-color: lightgray;
+}
+
+#interact {
+    text-align: center;
+}

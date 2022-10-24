@@ -1,71 +1,76 @@
-function getComputerChoice() {
-    const alternative = ["Rock", "Paper", "Scissors"];
-    const random = Math.floor(Math.random() * alternative.length);
-    const choice = alternative[random]
-    return choice
-}
+// GAMELOOP
+let playerScore = 0
+let computerScore = 0
 
-function getPlayerChoice() {
-    const alternative = ["Rock", "Paper", "Scissors"]
-    const input = prompt("Choose (1)Rock, (2)Paper, or (3) Scissors")
-    const choice = alternative[Number(input) - 1]
-    return choice
-}
+let htmlPlayerScore = document.getElementById('score-player')
+let htmlComputerScore = document.getElementById('score-computer')
+let htmlResult = document.getElementById('result')
+let htmlReveal = document.getElementById('reveal')
+let htmlBtnText = document.getElementById('btn-text')
 
-function playRound() {
-    const computerChoice = getComputerChoice()
-    const playerChoice = getPlayerChoice()
-    
+htmlPlayerScore.innerHTML = playerScore
+htmlComputerScore.innerHTML = computerScore
 
-    if (computerChoice == "Rock" && playerChoice == "Paper") {
-        console.log(`Computer chose: ${computerChoice}.`)
-        console.log(`Player chose: ${playerChoice}.`)
-        return "player"
-    } else if (computerChoice == "Paper" && playerChoice == "Scissors") {
-        console.log(`Computer chose: ${computerChoice}.`)
-        console.log(`Player chose: ${playerChoice}.`)
-        return "player"
-    } else if (computerChoice == "Scissors" && playerChoice == "Rock") {
-        console.log(`Computer chose: ${computerChoice}.`)
-        console.log(`Player chose: ${playerChoice}.`)
-        return "player"
-    } else if (computerChoice == playerChoice) {
-        console.log(`Computer chose: ${computerChoice}.`)
-        console.log(`Player chose: ${playerChoice}.`)
-        return "draw"
-    } else {
-        console.log(`Computer chose: ${computerChoice}.`)
-        console.log(`Player chose: ${playerChoice}.`)
-        return "computer"
-    }
-}
-
-function bo5() {
-    let playerScore = 0
-    let computerScore = 0
-    const textPlayerWins = `Player wins!`
-    const textComputerWins = `Computer wins!`
-    const textDraw = `It's a draw!`
-
-    while ((playerScore < 5) && (computerScore < 5)) {
-        const textScore = `Player Score: ${playerScore}. Computer Score: ${computerScore}`
-        outcome = playRound()
-        if (outcome == "player") {
-            console.log(textPlayerWins)
+function playRound(playerChoice) {
+    let computerChoice = getComputerChoice()
+    let result = ''
+    if (playerScore < 5 && computerScore < 5) {
+        if (playerChoice == computerChoice) {
+            result = "It's a tie!"
+            htmlResult.style.color = 'grey'
+            htmlReveal.innerHTML = `You picked <strong>${playerChoice}</strong> and the computer picked <strong>${computerChoice}</strong>.`
+        } else if (
+            (playerChoice == 'rock' && computerChoice == 'scissors') ||
+            (playerChoice == 'paper' && computerChoice == 'rock') ||
+            (playerChoice == 'scissors' && computerChoice == 'paper')
+        ) {
             playerScore++
-            console.log(playerScore)
-
-        } else if (outcome == "draw") {
-            console.log(textDraw)
-
-        } else if (outcome == "computer") {
-            console.log(textComputerWins)
-            computerScore++
-            console.log(computerScore)
-
+            htmlPlayerScore.innerHTML = playerScore
+            result = 'You win!'
+            htmlResult.style.color = 'green'
+            htmlReveal.innerHTML = `You picked <strong>${playerChoice}</strong> and the computer picked <strong>${computerChoice}</strong>.`
+            
         } else {
-            console.log(`Unknown return value: ${outcome}`)
+            computerScore++
+            htmlComputerScore.innerHTML = computerScore
+            result = 'Computer win!'
+            htmlResult.style.color = 'red'
+            htmlReveal.innerHTML = `You picked <strong>${playerChoice}</strong> and the computer picked <strong>${computerChoice}</strong>.`
         }
-        console.log(textScore)
+        htmlResult.innerHTML = result
     }
+
+    if (playerScore == 5) {
+        htmlResult.style.color = 'green'
+        htmlResult.innerHTML = `You reached 5 points. You win!`
+        htmlBtnText.innerHTML = `Play again?`
+        
+    }
+
+    if (computerScore == 5) {
+        htmlResult.style.color = 'red'
+        htmlResult.innerHTML = `Computer reached 5 points. Computer wins!`
+    }
+    
+    
 }
+
+// function restartGame() {
+//     playerScore = 0
+//     computerScore = 0
+// }
+
+function getComputerChoice() {
+    let choices = ['rock', 'paper', 'scissors']
+    return choices[Math.floor(Math.random() * choices.length)]
+}
+
+
+// UI
+const gameButtons = document.querySelectorAll('#game-btn')
+
+gameButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        playRound(button.value)
+    })
+})

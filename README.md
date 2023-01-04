@@ -1,6 +1,6 @@
 # Simple Rock Paper Scissors
 
-**To start playing, click (HERE)[http://www.stianovesen.com/simple-rock-paper-scissor/]
+**To start playing, click [HERE](http://www.stianovesen.com/simple-rock-paper-scissor/)**
 Rock Paper Scissors is a simple game that is played with two people. It is a game of chance that involves no skill or strategy.
 
 To play the game, each player counts to three in unison and simultaneously throws one of three hand signs representing rock, paper, or scissors. The winner is determined by the rules:
